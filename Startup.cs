@@ -22,7 +22,7 @@ namespace stake_code_challenge_3_bnpdup
         {
             services.AddControllersWithViews();
             services.AddDbContext<ApiContext>(options => options.UseInMemoryDatabase("ApiContext"));
-            services.AddScoped<ApiContext>();
+            // services.AddScoped<ApiContext>();
                 
         }
 

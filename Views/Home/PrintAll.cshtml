@@ -1,0 +1,13 @@
+﻿@model List<ShortLink.Models.ShortLinkPair>
+@{
+    ViewData["Title"] = "Print All!";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>This will show your shortened link!</p>
+<p>@Model[0].LongLink</p>
+@foreach (var link in Model)
+{
+    <p>@link.Id</p>
+    <p>@link.LongLink</p>
+}

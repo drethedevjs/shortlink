@@ -8,9 +8,9 @@ namespace ShortLink.Data
     public class ApiContext : DbContext  
     {  
         public DbSet<ShortLinkPair> Pairs { get; set; }  
-        public ApiContext(DbContextOptions options) : base(options)  
+        public ApiContext(DbContextOptions<ApiContext> options) : base(options)  
         {  
-            LoadPairs();  
+            // LoadPairs();  
         }  
   
         public void LoadPairs()  
@@ -21,7 +21,17 @@ namespace ShortLink.Data
   
         public List<ShortLinkPair> GetPairs()  
         {  
-            return Pairs.Local.ToList<ShortLinkPair>();  
-        }  
+            return Pairs.ToList<ShortLinkPair>();  
+        } 
+
+        public void AddPair(ShortLinkPair pair)
+        {
+            Pairs.Add(pair);
+        } 
+
+        public ShortLinkPair GetPair(string shortLink)
+        {
+            return Pairs.Single(pair => pair.ShortenedLink == shortLink);
+        }
     }  
 }  

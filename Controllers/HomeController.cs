@@ -26,6 +26,17 @@ namespace stake_code_challenge_3_bnpdup.Controllers
             return View(pair);
         }
 
+        [HttpGet]
+        public IActionResult PrintAll()
+        {
+            var pairs = this.apiContext.GetPairs();
+            foreach(var x in pairs)
+            {
+                Console.WriteLine($"{x.Id} {x.LongLink}");
+            }
+            return View(pairs);
+        }
+
         [HttpPost]
         public IActionResult Shorten(string longLink)
         {
@@ -34,14 +45,23 @@ namespace stake_code_challenge_3_bnpdup.Controllers
                 LongLink = longLink,
                 ShortenedLink = $"http://short.est/{RandomString(6)}"
             };
-            // this.apiContext.
-            pairs.Add(pair);
-            foreach(var x in pairs)
+            this.apiContext.AddPair(pair);
+            this.apiContext.SaveChanges();
+            
+            var myList = this.apiContext.GetPairs();
+            foreach(var x in myList)
             {
-                Console.WriteLine(pair.LongLink);
+                Console.WriteLine($"{x.Id} {x.LongLink}");
             }
             Console.WriteLine("Hit!");
             return RedirectToAction("Index", pair);
+        }
+
+        [HttpPost]
+        public IActionResult Decode(string shortLink)
+        {
+            
+            
         }
 
         private static Random random = new Random();
