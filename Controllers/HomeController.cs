@@ -26,11 +26,11 @@ namespace stake_code_challenge_3_bnpdup.Controllers
         [HttpPost]
         public IActionResult Shorten(string longLink)
         {
-            var randStr = RandomString(6);
+            // var randStr = RandomString(6);
             var pair = new ShortLinkPair()
             {
                 LongLink = longLink,
-                ShortenedLink = $"http://short.est/{randStr}"
+                ShortenedLink = $"http://short.est/{RandomString(6)}"
             };
 
             pairs.Add(pair);
