@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ShortLink.Models.ShortLinkPair
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -9,7 +10,7 @@
     <form asp-action="Shorten" asp-controller="Home" asp-action="Shorten" method="post">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Your Link Here</span>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="longUrl">
+            <input type="text" class="form-control" id="exampleInputEmail1" asp-for="@Model.LongLink" aria-describedby="longUrl">
             <button type="submit" class="btn btn-outline-success">Shorten</button>
         </div>
     </form>
