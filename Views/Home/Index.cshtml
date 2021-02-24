@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Short Link!</h1>
+    <p>Enter your link below to be shortened.</p>
+
+    <form asp-action="Shorten" asp-controller="Home" asp-action="Shorten" method="post">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Your Link Here</span>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="longUrl">
+            <button type="submit" class="btn btn-outline-success">Shorten</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <h3>Your New Link</h3>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Your Link Here</span>
+        <input type="url" class="form-control" aria-label="longUrl" aria-describedby="shortLink-addon">
+        <button class="btn btn-outline-success" type="button" id="copyNewLinkButton">Copy</button>
+    </div>
+</div>

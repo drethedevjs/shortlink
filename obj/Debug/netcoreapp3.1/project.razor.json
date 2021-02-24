@@ -14392,38 +14392,38 @@
   "RootNamespace": "stake_code_challenge_3_bnpdup",
   "Documents": [
     {
-      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Pages/Shared/_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Views/_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Pages/_ViewStart.cshtml",
-      "TargetPath": "Pages\\_ViewStart.cshtml",
+      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Views/Home/Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Pages/Index.cshtml",
-      "TargetPath": "Pages\\Index.cshtml",
+      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Views/Shared/_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Pages/Privacy.cshtml",
-      "TargetPath": "Pages\\Privacy.cshtml",
+      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Views/_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Pages/_ViewImports.cshtml",
-      "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Views/Home/ConvertedLink.cshtml",
+      "TargetPath": "Views\\Home\\ConvertedLink.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Pages/Error.cshtml",
-      "TargetPath": "Pages\\Error.cshtml",
+      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Views/Shared/Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Pages/Shared/_Layout.cshtml",
-      "TargetPath": "Pages\\Shared\\_Layout.cshtml",
+      "FilePath": "/Users/andrethomas/Sites/stake-challenge/stake-code-challenge-3-bnpdup/Views/Shared/_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     }
   ],
