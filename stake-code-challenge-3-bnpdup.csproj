@@ -5,6 +5,10 @@
     <RootNamespace>stake_code_challenge_3_bnpdup</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.3" />
+  </ItemGroup>
+
 
 
 </Project>

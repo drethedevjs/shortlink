@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ShortLink.Data;
 using ShortLink.Models;
 using stake_code_challenge_3_bnpdup.Models;
 
@@ -11,11 +12,13 @@ namespace stake_code_challenge_3_bnpdup.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
         List<ShortLinkPair> pairs = new List<ShortLinkPair>();
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApiContext apiContext;
+        public HomeController(ILogger<HomeController> logger, ApiContext apiContext)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.apiContext = apiContext;
         }
 
         public IActionResult Index(ShortLinkPair pair)
@@ -26,13 +29,12 @@ namespace stake_code_challenge_3_bnpdup.Controllers
         [HttpPost]
         public IActionResult Shorten(string longLink)
         {
-            // var randStr = RandomString(6);
             var pair = new ShortLinkPair()
             {
                 LongLink = longLink,
                 ShortenedLink = $"http://short.est/{RandomString(6)}"
             };
-
+            // this.apiContext.
             pairs.Add(pair);
             foreach(var x in pairs)
             {
@@ -47,11 +49,6 @@ namespace stake_code_challenge_3_bnpdup.Controllers
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
-        public IActionResult ConvertedLink()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
