@@ -24,6 +24,11 @@ namespace shortLink.Controllers
         [HttpPost, Route("encode")]
         public ShortLinkPair Encode(string longLink)
         {
+            Uri uri = null;
+            var isValidUrl = Uri.TryCreate(longLink, UriKind.Absolute, out uri);
+            if(!isValidUrl)
+                throw new InvalidOperationException("You did not enter a valid Url. Please try again.");
+                
             var pair = this.apiContext.GetPairByLongLink(longLink);
             
             if(pair != null)
