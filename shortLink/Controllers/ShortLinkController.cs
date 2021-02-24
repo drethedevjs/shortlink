@@ -22,30 +22,47 @@ namespace shortLink.Controllers
         }
 
         [HttpPost, Route("encode")]
-        public ShortLinkPair Encode(string longLink)
+        public IActionResult Encode(string longLink)
         {
-            Uri uri = null;
-            var isValidUrl = Uri.TryCreate(longLink, UriKind.Absolute, out uri);
-            if(!isValidUrl)
-                throw new InvalidOperationException("You did not enter a valid Url. Please try again.");
+            try
+            {
+                Uri uri = null;
+                var isValidUrl = Uri.TryCreate(longLink, UriKind.Absolute, out uri);
+                if(!isValidUrl)
+                    throw new InvalidOperationException("You did not enter a valid Url. Please try again.");
+                    
+                var pair = this.apiContext.GetPairByLongLink(longLink);
                 
-            var pair = this.apiContext.GetPairByLongLink(longLink);
-            
-            if(pair != null)
-                return pair;
+                if(pair != null)
+                    return Ok(pair);
 
-            pair = new ShortLinkPair() { LongLink = longLink, ShortenedLink = $"http://short.est/{RandomString(6)}" };
-            
-            this.apiContext.AddPair(pair);
-            this.apiContext.SaveChanges();
-            
-            return pair;
+                pair = new ShortLinkPair() { LongLink = longLink, ShortenedLink = $"http://short.est/{RandomString(6)}" };
+                
+                this.apiContext.AddPair(pair);
+                this.apiContext.SaveChanges();
+                
+                return Ok(pair);
+            }
+            catch (Exception ex)
+            {
+                this.logger.Log(LogLevel.Error, ex.Message);
+                return Content(ex.Message);
+            }
         }
 
         [HttpGet, Route("decode")]
-        public ShortLinkPair Decode(string shortenedLink)
+        public IActionResult Decode(string shortenedLink)
         {
-            return this.apiContext.GetPairByShortenedLink(shortenedLink);
+            try
+            {
+                var pair = this.apiContext.GetPairByShortenedLink(shortenedLink);
+                return Ok(pair);
+            }
+            catch (Exception ex)
+            {
+                this.logger.Log(LogLevel.Error, ex.Message);
+                return Content("That url is not recognized. Please enter a Url that has already been saved.");
+            }
         }
 
         [HttpGet, Route("all")]

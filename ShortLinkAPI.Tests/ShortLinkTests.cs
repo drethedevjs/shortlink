@@ -19,11 +19,11 @@ namespace ShortLinkAPI.Tests
         {
             // Act
             var validShortLinkPair = this.shortLinkController.Encode(validLink);
-            var invalidShortLinkPair = this.shortLinkController.Encode(someString);
+            var invalidShortLinkPair = this.shortLinkController.Encode(invalidLink);
 
             // Assert
             Assert.IsType<ShortLinkPair>(validShortLinkPair);
-            Assert.Is
+            // Assert.Is
         }
 
         [Fact]
