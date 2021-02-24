@@ -7,9 +7,9 @@
     <h1 class="display-4">Short Link!</h1>
     <p>Enter your link below to be shortened.</p>
 
-    <form asp-action="Shorten" asp-controller="Home" asp-action="Shorten" method="post">
+    <form asp-controller="Home" asp-action="Encode" method="post">
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Your Link Here</span>
+            <span class="input-group-text" id="basic-addon1">Encoded</span>
             <input type="text" class="form-control" id="exampleInputEmail1" asp-for="@Model.LongLink" aria-describedby="longUrl">
             <button type="submit" class="btn btn-outline-success">Shorten</button>
         </div>
@@ -18,11 +18,14 @@
     <hr>
 
     <h3>Your New Link</h3>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Your Link Here</span>
-        <input type="url" class="form-control" aria-label="longUrl" aria-describedby="shortLink-addon" asp-for="@Model.ShortenedLink">
-        <button class="btn btn-outline-success" type="button" id="copyNewLinkButton">Copy</button>
-    </div>
+    <form asp-controller="Home" asp-action="Decode" method="post">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Decoded</span>
+            <input type="url" class="form-control" aria-label="longUrl" aria-describedby="shortLink-addon" asp-for="@Model.ShortenedLink">
+            <button type="submit" class="btn btn-outline-primary" type="button" id="decodeButton">Decode</button>
+            <button class="btn btn-outline-success" type="button" id="copyNewLinkButton">Copy</button>
+        </div>
+    </form>
 </div>
 
         <button class="btn btn-outline-success" type="button" id="printAllButton" onclick="location.href='@Url.Action("PrintAll", "Home")'">Print All</button>

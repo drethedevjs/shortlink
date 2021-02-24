@@ -38,7 +38,7 @@ namespace stake_code_challenge_3_bnpdup.Controllers
         }
 
         [HttpPost]
-        public IActionResult Shorten(string longLink)
+        public IActionResult Encode(string longLink)
         {
             var pair = new ShortLinkPair()
             {
@@ -51,17 +51,18 @@ namespace stake_code_challenge_3_bnpdup.Controllers
             var myList = this.apiContext.GetPairs();
             foreach(var x in myList)
             {
-                Console.WriteLine($"{x.Id} {x.LongLink}");
+                Console.WriteLine($"{x.Id} {x.LongLink} | {x.ShortenedLink}");
             }
-            Console.WriteLine("Hit!");
             return RedirectToAction("Index", pair);
         }
 
         [HttpPost]
-        public IActionResult Decode(string shortLink)
+        public IActionResult Decode(string shortenedLink)
         {
-            
-            
+            Console.WriteLine("Hit!");
+            var pair = this.apiContext.GetPair(shortenedLink);
+            Console.WriteLine($"Retrieved {pair.LongLink} using {shortenedLink}");
+            return RedirectToAction("Index", pair);
         }
 
         private static Random random = new Random();
