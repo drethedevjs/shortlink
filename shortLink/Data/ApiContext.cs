@@ -26,5 +26,10 @@ namespace ShortLink.Data
         {
             return Pairs.Single(pair => pair.ShortenedLink == shortLink);
         }
+
+        public ShortLinkPair GetPairByLongLink(string longLink)
+        {
+            return Pairs.FirstOrDefault(pair => pair.LongLink == longLink);
+        }
     }  
 }  

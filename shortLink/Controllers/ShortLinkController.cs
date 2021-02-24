@@ -9,7 +9,7 @@ using ShortLink.Models;
 namespace shortLink.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ShortLinkController : ControllerBase
     {
         private readonly ILogger<ShortLinkController> logger;
@@ -24,29 +24,23 @@ namespace shortLink.Controllers
         [HttpPost, Route("encode")]
         public ShortLinkPair Encode(string longLink)
         {
-            var pair = new ShortLinkPair()
-            {
-                LongLink = longLink,
-                ShortenedLink = $"http://short.est/{RandomString(6)}"
-            };
+            var pair = this.apiContext.GetPairByLongLink(longLink);
+            
+            if(pair != null)
+                return pair;
+
+            pair = new ShortLinkPair() { LongLink = longLink, ShortenedLink = $"http://short.est/{RandomString(6)}" };
+            
             this.apiContext.AddPair(pair);
             this.apiContext.SaveChanges();
             
-            var myList = this.apiContext.GetPairs();
-            foreach(var x in myList)
-            {
-                Console.WriteLine($"{x.Id} {x.LongLink} | {x.ShortenedLink}");
-            }
             return pair;
         }
 
-        [HttpPost, Route("decode")]
-        public IActionResult Decode(string shortenedLink)
+        [HttpGet, Route("decode")]
+        public ShortLinkPair Decode(string shortenedLink)
         {
-            Console.WriteLine("Hit!");
-            var pair = this.apiContext.GetPairByShortenedLink(shortenedLink);
-            Console.WriteLine($"Retrieved {pair.LongLink} using {shortenedLink}");
-            return RedirectToAction("Index", pair);
+            return this.apiContext.GetPairByShortenedLink(shortenedLink);
         }
 
         private static Random random = new Random();

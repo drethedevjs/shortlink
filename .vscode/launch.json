@@ -13,9 +13,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             "OS-COMMENT4": "If you have changed target frameworks, make sure to update the program path.",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/stake-code-challenge-3-bnpdup.dll",
+            "program": "${workspaceFolder}/shortLink/bin/Debug/netcoreapp3.1/shortLink.dll",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/shortLink",
             "stopAtEntry": false,
             "OS-COMMENT5": "Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser",
             "serverReadyAction": {
