@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShortLink.Models;
@@ -17,22 +18,35 @@ namespace stake_code_challenge_3_bnpdup.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(ShortLinkPair pair)
         {
-            return View();
+            return View(pair);
         }
 
         [HttpPost]
         public IActionResult Shorten(string longLink)
         {
+            var randStr = RandomString(6);
             var pair = new ShortLinkPair()
             {
                 LongLink = longLink,
-                ShortenedLink = "http://short.est/GeAi9K"
+                ShortenedLink = $"http://short.est/{randStr}"
             };
+
+            pairs.Add(pair);
+            foreach(var x in pairs)
+            {
+                Console.WriteLine(pair.LongLink);
+            }
             Console.WriteLine("Hit!");
-            Console.WriteLine(pair.LongLink);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", pair);
+        }
+
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         public IActionResult ConvertedLink()
