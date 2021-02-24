@@ -43,6 +43,12 @@ namespace shortLink.Controllers
             return this.apiContext.GetPairByShortenedLink(shortenedLink);
         }
 
+        [HttpGet, Route("all")]
+        public List<ShortLinkPair> GetAll()
+        {
+            return this.apiContext.GetPairs();
+        }
+
         private static Random random = new Random();
         public static string RandomString(int length)
         {
