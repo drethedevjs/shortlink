@@ -10,13 +10,6 @@ namespace ShortLink.Data
         public DbSet<ShortLinkPair> Pairs { get; set; }  
         public ApiContext(DbContextOptions<ApiContext> options) : base(options)  
         {  
-            // LoadPairs();  
-        }  
-  
-        public void LoadPairs()  
-        {  
-            Pairs.Add(new ShortLinkPair() { LongLink = "http://thisisalonglink.com", ShortenedLink = "http://shorterLink.com/123ABC" });  
-            Pairs.Add(new ShortLinkPair() { LongLink = "http://thisisalonglink.com/2", ShortenedLink = "http://shorterLink.com/ABC123" });  
         }  
   
         public List<ShortLinkPair> GetPairs()  
@@ -29,7 +22,7 @@ namespace ShortLink.Data
             Pairs.Add(pair);
         } 
 
-        public ShortLinkPair GetPair(string shortLink)
+        public ShortLinkPair GetPairByShortenedLink(string shortLink)
         {
             return Pairs.Single(pair => pair.ShortenedLink == shortLink);
         }

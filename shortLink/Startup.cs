@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShortLink.Data;
 
-namespace stake_code_challenge_3_bnpdup
+namespace shortLink
 {
     public class Startup
     {
@@ -20,10 +20,9 @@ namespace stake_code_challenge_3_bnpdup
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddDbContext<ApiContext>(options => options.UseInMemoryDatabase("ApiContext"));
-            // services.AddScoped<ApiContext>();
-                
+            services.AddControllers();
+            services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase("ApiContext"));  
+            services.AddScoped<ApiContext>();  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,14 +32,8 @@ namespace stake_code_challenge_3_bnpdup
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -48,9 +41,7 @@ namespace stake_code_challenge_3_bnpdup
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

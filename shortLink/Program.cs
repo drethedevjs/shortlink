@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace stake_code_challenge_3_bnpdup
+namespace shortLink
 {
     public class Program
     {
