@@ -14,16 +14,16 @@ namespace ShortLinkAPI.Tests
         }
 
         [Theory]
-        public void TestEncode()
+        [InlineData("http://example.com/", "someString")]
+        public void TestEncode(string validLink, string invalidLink)
         {
-            // Arrange
-            var longLink = "http://example.com/";
-
             // Act
-            var shortLinkPair = this.shortLinkController.Encode(longLink);
+            var validShortLinkPair = this.shortLinkController.Encode(validLink);
+            var invalidShortLinkPair = this.shortLinkController.Encode(someString);
 
             // Assert
-            Assert.IsType<ShortLinkPair>(shortLinkPair);
+            Assert.IsType<ShortLinkPair>(validShortLinkPair);
+            Assert.Is
         }
 
         [Fact]
