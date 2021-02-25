@@ -9,8 +9,6 @@ namespace ShortLinkAPI.Tests
 {
     public class ShortLinkTests : InMemoryDbTests
     {
-        ApiContext apiContext;
-
         public ShortLinkTests() : base(new DbContextOptionsBuilder<ApiContext>().UseInMemoryDatabase("ApiContext").Options)
         {
         }

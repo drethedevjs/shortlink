@@ -20,7 +20,7 @@
 6. Navigate back to Postman (or whatever equivalent program of your choice) and run the commands in step 3. 
     - The first tab (POST) will add links to the database. After each call, you'll recieve a json object in return signifying that the program is working and is storing data into the in-memory database.
     - The second tab (GET) will show all the links that you have added to the database. Pick a short link (that is, the `"shortenedLink"` property) and copy it (the value).
-    - The third tab is where you can retreive links that have already been added. Ensuring that the "Params" tab under the url field is selected, paste the copied link into the *Value* column and write the word `shortenedLink` into the *Key* column. Once you have done this, click the *Send* button. You should see the link pair associated with that shortened link return as a json object.
+    - The third tab is where you can retreive links that have already been added. Ensuring that the "Params" tab under the url field is selected, paste the copied link into the *Value* column and write the word `shortenedLink` into the *Key* column if it isn't already there. Once you have done this, click the *Send* button. You should see the link pair associated with that shortened link return as a json object.
 
 ## Run Tests
 Open your IDE of choice and open the *ShortLinkAPI.Tests* folder. Once inside, use your IDE's testing panel to test the endpoints.
