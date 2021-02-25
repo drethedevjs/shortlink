@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShortLink.Data;
 
-namespace shortLink
+namespace ShortLink
 {
     public class Startup
     {

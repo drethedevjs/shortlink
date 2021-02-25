@@ -1,12 +1,11 @@
-using System;
+using System.Net;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using shortLink.Controllers;
+using ShortLink.Controllers;
 using ShortLink.Data;
 using ShortLink.Models;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace ShortLinkAPI.Tests
 {
@@ -54,6 +53,24 @@ namespace ShortLinkAPI.Tests
                 // Assert
                 Assert.IsType<ShortLinkPair>(decodedShortLinkPair.Value);
                 Assert.Equal("http://example.com/", decodedShortLinkPair.Value.LongLink);
+            }
+        }
+
+        [Theory]
+        [InlineData("http://example.com/")]
+        public void TestShortLinkValidityError(string link)
+        {
+            using(var context = new ApiContext(options))
+            {
+                // Arrange
+                var shortLinkController = new ShortLinkController(context);
+
+                // Act 
+                var decodedShortLinkPair = shortLinkController.Decode(link);
+                var badResult = decodedShortLinkPair.Result as BadRequestObjectResult;
+
+                // Assert
+                Assert.Equal("This isn't a short link. Please check your spelling and try again.", badResult.Value);
             }
 
         }
