@@ -12,17 +12,15 @@ namespace shortLink.Controllers
     [Route("api/[controller]")]
     public class ShortLinkController : ControllerBase
     {
-        // private readonly ILogger<ShortLinkController> logger;
         private readonly ApiContext apiContext;
 
-        public ShortLinkController(ApiContext apiContext) // ILogger<ShortLinkController> logger,
+        public ShortLinkController(ApiContext apiContext)
         {
-            // this.logger = logger;
             this.apiContext = apiContext;
         }
 
         [HttpPost, Route("encode")]
-        public IActionResult Encode(string longLink)
+        public ActionResult<ShortLinkPair> Encode(string longLink)
         {
             try
             {
@@ -41,27 +39,25 @@ namespace shortLink.Controllers
                 this.apiContext.AddPair(pair);
                 this.apiContext.SaveChanges();
                 
-                return Ok(pair);
+                return pair;
             }
             catch (Exception ex)
             {
-                // this.logger.Log(LogLevel.Error, ex.Message);
-                return Content(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpGet, Route("decode")]
-        public IActionResult Decode(string shortenedLink)
+        public ActionResult<ShortLinkPair> Decode(string shortenedLink)
         {
             try
             {
                 var pair = this.apiContext.GetPairByShortenedLink(shortenedLink);
-                return Ok(pair);
+                return pair;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // this.logger.Log(LogLevel.Error, ex.Message);
-                return Content("That url is not recognized. Please enter a Url that has already been saved.");
+                return BadRequest("That url is not recognized. Please enter a Url that has already been saved.");
             }
         }
 

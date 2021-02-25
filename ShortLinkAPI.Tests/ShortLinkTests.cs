@@ -12,17 +12,10 @@ namespace ShortLinkAPI.Tests
 {
     public class ShortLinkTests : InMemoryDbTests
     {
-        private readonly ITestOutputHelper outputHelper;
         ApiContext apiContext;
-        // ShortLinkController shortLinkController;
 
-        public ShortLinkTests(ITestOutputHelper outputHelper) : base(new DbContextOptionsBuilder<ApiContext>().UseInMemoryDatabase("ApiContext").Options)
+        public ShortLinkTests() : base(new DbContextOptionsBuilder<ApiContext>().UseInMemoryDatabase("ApiContext").Options)
         {
-            this.outputHelper = outputHelper;
-
-            // this.options = options;
-            // this.apiContext = new ApiContext(this.options);
-            // this.shortLinkController = new ShortLinkController(this.apiContext);
         }
 
         [Theory]
@@ -31,30 +24,37 @@ namespace ShortLinkAPI.Tests
         {
             using(var context = new ApiContext(options))
             {
+                // Arrange
                 var shortLinkController = new ShortLinkController(context);
+
                 // Act
                 var validShortLinkPair = shortLinkController.Encode(validLink);
                 var invalidShortLinkPair = shortLinkController.Encode(invalidLink);
 
-                this.outputHelper.WriteLine($"This is something: {invalidShortLinkPair}");
-
                 // Assert
-                Assert.IsType<ShortLinkPair>(validShortLinkPair);
-                Assert.IsType<ContentResult>(invalidShortLinkPair);
+                Assert.IsType<ShortLinkPair>(validShortLinkPair.Value);
+                Assert.Equal("http://example.com/",validShortLinkPair.Value.LongLink);
+                Assert.Null(invalidShortLinkPair.Value);
             }
         }
 
-        [Fact]
-        public void TestDecode()
+        [Theory]
+        [InlineData("http://example.com/")]
+        public void TestDecode(string link)
         {
-            // Arrange
-            var longLink = "http://example.com/";
+            using(var context = new ApiContext(options))
+            {
+                // Arrange
+                var shortLinkController = new ShortLinkController(context);
 
-            // Act
-            // var shortLinkPair = this.shortLinkController.Encode(longLink);
-            // var result = this.shortLinkController.Decode(shortLinkPair.);
+                // Act
+                var shortLinkPair = shortLinkController.Encode(link);
+                var decodedShortLinkPair = shortLinkController.Decode(shortLinkPair.Value.ShortenedLink);
 
-            // Assert
+                // Assert
+                Assert.IsType<ShortLinkPair>(decodedShortLinkPair.Value);
+                Assert.Equal("http://example.com/", decodedShortLinkPair.Value.LongLink);
+            }
 
         }
     }
