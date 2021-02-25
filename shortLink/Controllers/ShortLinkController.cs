@@ -12,12 +12,12 @@ namespace shortLink.Controllers
     [Route("api/[controller]")]
     public class ShortLinkController : ControllerBase
     {
-        private readonly ILogger<ShortLinkController> logger;
+        // private readonly ILogger<ShortLinkController> logger;
         private readonly ApiContext apiContext;
 
-        public ShortLinkController(ILogger<ShortLinkController> logger, ApiContext apiContext)
+        public ShortLinkController(ApiContext apiContext) // ILogger<ShortLinkController> logger,
         {
-            this.logger = logger;
+            // this.logger = logger;
             this.apiContext = apiContext;
         }
 
@@ -45,7 +45,7 @@ namespace shortLink.Controllers
             }
             catch (Exception ex)
             {
-                this.logger.Log(LogLevel.Error, ex.Message);
+                // this.logger.Log(LogLevel.Error, ex.Message);
                 return Content(ex.Message);
             }
         }
@@ -60,7 +60,7 @@ namespace shortLink.Controllers
             }
             catch (Exception ex)
             {
-                this.logger.Log(LogLevel.Error, ex.Message);
+                // this.logger.Log(LogLevel.Error, ex.Message);
                 return Content("That url is not recognized. Please enter a Url that has already been saved.");
             }
         }
