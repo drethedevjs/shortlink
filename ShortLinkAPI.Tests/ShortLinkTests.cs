@@ -53,7 +53,7 @@ namespace ShortLinkAPI.Tests
         }
 
         [Theory]
-        [InlineData("http://example.com/")]
+        [InlineData("http://shor.test.com/")]
         public void TestShortLinkValidityError(string link)
         {
             using(var context = new ApiContext(options))
