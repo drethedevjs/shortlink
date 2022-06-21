@@ -1,3 +1,6 @@
+# Introduction
+A company that I was interviewing with asked me to create this as a coding challenge. The challenge can be viewed below in the README.md file.
+
 # API Instructions
 ## Interact with the API
 1. Clone web api into your directory.
